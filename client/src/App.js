@@ -65,7 +65,7 @@ function App() {
   const sliceLyrics = ({ text }) => {
     const split = text.split(" ");
     const numberOfWords = split.length;
-    const randomWordIndex = chance.integer({ min: 250, max: numberOfWords });
+    const randomWordIndex = chance.integer({ min: 60, max: numberOfWords });
     randomNumber = randomWordIndex;
     const sliced = [];
     for (let i = randomWordIndex - 50; i < randomWordIndex + 50; i++) {
