@@ -1,9 +1,10 @@
 const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
-const dotenv = require("dotenv").config();
 const path = require("path");
 const fetch = require("node-fetch");
+const dotenv = require("dotenv");
+dotenv.config();
 
 const app = express();
 
@@ -37,7 +38,7 @@ app.post("/api/get-lyrics", async (req, res) => {
   }
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 4000;
 
 app.listen(port, () => {
   console.log(`Connecté sur le port ${port}`);
