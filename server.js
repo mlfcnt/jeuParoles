@@ -26,7 +26,7 @@ app.post("/api/get-lyrics", async (req, res) => {
     if (error) {
       const formattedError = error.startsWith("Lyric no found")
         ? "Paroles non trouvées pour cette chanson. Cette api est un peu pourrie"
-        : error;
+        : "Erreur lors du fetch....C'est deja cassé :(";
       return res.status(500).send({ success: false, error: formattedError });
     }
     const { artist, track } = result;
