@@ -53,8 +53,6 @@ function App() {
 
   const handleSumbitAnswer = (e) => {
     e.preventDefault();
-    console.log(answer.toLowerCase());
-    console.log(track.text.split(" ")[randomNumber].toLowerCase());
     return alert(
       answer.toLowerCase() === track.text.split(" ")[randomNumber].toLowerCase()
         ? "Bien joué!!"
