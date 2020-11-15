@@ -54,7 +54,8 @@ function App() {
   const handleSumbitAnswer = (e) => {
     e.preventDefault();
     return alert(
-      answer.toLowerCase() === track.text.split(" ")[randomNumber].toLowerCase()
+      answer.trim().toLowerCase() ===
+        track.text.split(" ")[randomNumber].trim().toLowerCase()
         ? "Bien joué!!"
         : `Non :(. La réponse était ==> ${track.text.split(" ")[randomNumber]})`
     );
