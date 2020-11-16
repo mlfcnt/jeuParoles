@@ -12,7 +12,9 @@ function App() {
   let randomNumber;
   let answer;
   const rootUrl =
-    process.env.NODE_ENV === "development" ? "http://localhost:4000" : "";
+    process.env.NODE_ENV === "development"
+      ? "http://localhost:4000"
+      : "https://jeu-parole.herokuapp.com/";
 
   const getParoles = async () => {
     setArtist("");
