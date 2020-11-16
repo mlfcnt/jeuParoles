@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "fuser -k 4000/tcp && node server.js",
+    "start": "node server.js",
     "heroku-postbuild": "cd client && yarn && yarn run build"
   },
   "dependencies": {
