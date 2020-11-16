@@ -11,13 +11,15 @@ function App() {
   const chance = new Chance();
   let randomNumber;
   let answer;
+  const rootUrl =
+    process.env.NODE_ENV === "development" ? "http://localhost:4000" : "";
 
   const getParoles = async () => {
     setArtist("");
     setTrack("");
     setError("");
 
-    const resp = await fetch("/api/get-lyrics", {
+    const resp = await fetch(`${rootUrl}/api/get-lyrics`, {
       method: "POST",
       headers: {
         Accept: "application/json",
@@ -80,54 +82,75 @@ function App() {
   return (
     <div className="App">
       <div class="container">
-        <h1>Jeu des paroles</h1>
+        <h1 className="mb-4">Révises tes classiques</h1>
         <form onSubmit={handleSubmit}>
-          <label style={{ marginRight: "0.2 rem" }} htmlFor="artiste">
-            Artiste
-          </label>
-          <input
-            name="artiste"
-            type="text"
-            placeholder="Artiste"
-            onChange={handleChange}
-            style={{ marginRight: "1.5rem" }}
-          />
-          <label style={{ marginRight: "0.2 rem" }} htmlFor="chanson">
-            Chanson
-          </label>
-          <input
-            name="chanson"
-            type="text"
-            placeholder="Chanson"
-            onChange={handleChange}
-            style={{ marginRight: "1.5rem" }}
-          />
-          <button type="submit">Chercher</button>
-        </form>
-        {error && <p>{error}</p>}
-        <div>
-          {artist && <p>{artist.name}</p>}
-          {track && <p>{track.name}</p>}
-        </div>
-        {track && (
-          <>
-            <p style={{ border: "2px solid black", padding: "2rem" }}>
-              [...] {sliceLyrics(track)}
-            </p>
-            <form onSubmit={handleSumbitAnswer}>
-              <label htmlFor="reponse">
-                Quel est le mot manquant dans ces paroles ? (a la place de
-                ???????)
+          <div className="d-flex justify-content-center align-content-center flex-wrap mb-4">
+            <div>
+              <label htmlFor="artiste" className="mx-2">
+                Artiste
               </label>
               <input
-                name="reponse"
+                name="artiste"
+                id="artiste"
                 type="text"
-                placeholder="Réponse"
-                onChange={(e) => (answer = e.target.value)}
+                placeholder="Artiste"
+                onChange={handleChange}
               />
-              <button type="submit">Vérifier</button>
+            </div>
+            <div>
+              <label htmlFor="chanson" className="mx-2">
+                Chanson
+              </label>
+              <input
+                name="chanson"
+                id="chanson"
+                type="text"
+                placeholder="Chanson"
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+          <button type="submit" className="btn btn-primary mb-4">
+            Chercher
+          </button>
+        </form>
+        {error && <p>{error}</p>}
+        {track ? (
+          <div className="mb-4">
+            <div
+              style={{ border: "1px dotted black" }}
+              className="px-4 py-4 mb-4"
+            >
+              <h3 className="mb-3">
+                {artist.name} {track.name}
+              </h3>
+              [...] {sliceLyrics(track)}
+            </div>
+            <form onSubmit={handleSumbitAnswer}>
+              <div class="mb-2">
+                <label htmlFor="reponse">
+                  Quel est le mot manquant dans ces paroles ? (a la place de
+                  ???????)
+                </label>
+              </div>
+              <div
+                style={{ gap: "15px" }}
+                className="d-flex justify-content-center"
+              >
+                <input
+                  name="reponse"
+                  type="text"
+                  placeholder="Réponse"
+                  onChange={(e) => (answer = e.target.value)}
+                />
+                <button type="submit" class="btn btn-primary">
+                  Vérifier
+                </button>
+              </div>
             </form>
-          </>
+          </div>
+        ) : (
+          ""
         )}
       </div>
     </div>
